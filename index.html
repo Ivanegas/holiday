@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Holiday Inn</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1571896349842-33c89424de2d?q=80&w=1920');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+
+        .menu-icon {
+            width: 6rem;
+            height: 6rem;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(4px);
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .menu-icon:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(1.1);
+        }
+
+        .menu-text {
+            color: white;
+            font-size: 1.125rem;
+            margin-top: 0.75rem;
+            font-weight: 500;
+        }
+
+        .welcome-text {
+            color: white;
+            font-size: 3rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        .subtitle-text {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.5rem;
+            margin-bottom: 4rem;
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        .hotel-logo {
+            width: 120px;
+            /* Reducido de 200px a 120px */
+            margin: 0 auto 2rem auto;
+            animation: fadeIn 0.5s ease-out forwards;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hotel-logo img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .carousel-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3rem;
+        }
+
+        .menu-items {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .carousel-button {
+            color: white;
+            opacity: 0.6;
+            padding: 1rem;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .carousel-button:hover {
+            opacity: 1;
+        }
+
+        .carousel-button:disabled {
+            opacity: 0.3;
+            cursor: default;
+        }
+
+        #test {
+            margin-top: -5em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="min-h-screen flex flex-col items-center justify-between p-12 pb-24">
+        <!-- Header -->
+        <div class="w-full flex justify-between items-start">
+            <!-- Clock -->
+            <div class="text-white">
+                <div class="text-6xl font-light mb-1" id="clock"></div>
+                <div class="text-lg opacity-80" id="date"></div>
+            </div>
+
+            <!-- Weather -->
+            <div class="absolute top-8 right-48 text-white">
+                <div class="text-lg">23° / 21° C</div>
+                <div class="text-sm opacity-80">RM 1</div>
+            </div>
+
+            <!-- Logo -->
+            <div class="absolute top-8 right-8 text-white flex items-center space-x-2">
+                <div class="text-3xl font-light">Weather</div>
+            </div>
+        </div>
+
+        <!-- Welcome Message -->
+        <div class="text-center mt-12" id="test">
+            <!-- Hotel Logo -->
+            <div class="hotel-logo">
+                <img src="assets/img/logo.png" alt="Mi Hotel Logo" style="color: white;">
+            </div>
+
+            <h1 class="welcome-text">Buenas tardes</h1>
+            <p class="subtitle-text">Le deseamos una agradable estancia</p>
+
+            <!-- Menu Carousel -->
+            <div class="carousel-container">
+                <button class="carousel-button" id="prevButton">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m15 18-6-6 6-6" />
+                    </svg>
+                </button>
+
+                <div class="menu-items" id="menuItems"></div>
+
+                <button class="carousel-button" id="nextButton">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m9 18 6-6-6-6" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div></div> <!-- Spacer -->
+    </div>
+
+    <script>
+        // Menu Items Data
+        const menuItems = [
+            { icon: 'wifi', text: 'Wifi', link: 'wifi.html' },
+            { icon: 'iptv', text: 'IPTV', link: "intent:#Intent;action=android.intent.action.MAIN;category=android.intent.category.LEANBACK_LAUNCHER;package=hn.cablecolor.ccveotv;end" },
+            { icon: 'utensils', text: 'Menú', link: 'menu.html' },
+            { icon: 'music', text: 'Music', link: 'spotify://' },
+            { icon: 'movie', text: 'Movie', link: 'intent:#Intent;action=android.intent.action.VIEW;package=com.disney.disneyplus;end' }
+        ];
+
+        let startIndex = 0;
+        const itemsToShow = 4;
+
+        // Clock and Date
+        function updateDateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('es', {
+                hour: 'numeric',
+                minute: '2-digit',
+                hour12: true
+            });
+            const dateString = now.toLocaleDateString('es', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+
+            document.getElementById('clock').textContent = timeString;
+            document.getElementById('date').textContent = dateString;
+        }
+
+        setInterval(updateDateTime, 1000);
+        updateDateTime();
+
+        // Menu Carousel
+        function updateCarousel() {
+            const menuContainer = document.getElementById('menuItems');
+            menuContainer.innerHTML = '';
+
+            const visibleItems = menuItems.slice(startIndex, startIndex + itemsToShow);
+
+            visibleItems.forEach(item => {
+                const menuItem = document.createElement('div');
+                menuItem.className = 'flex flex-col items-center menu-item';
+
+                // Si la opción tiene un enlace, envuelve el contenido en un <a>
+                const link = item.link ? `<a href="${item.link}" class="flex flex-col items-center menu-item">` : '';
+                const linkClose = item.link ? `</a>` : '';
+
+                menuItem.innerHTML = `
+            ${link}
+            <div class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    ${getIconPath(item.icon)}
+                </svg>
+            </div>
+            <span class="menu-text">${item.text}</span>
+            ${linkClose}
+        `;
+                menuContainer.appendChild(menuItem);
+            });
+
+            document.getElementById('prevButton').disabled = startIndex === 0;
+            document.getElementById('nextButton').disabled = startIndex >= menuItems.length - itemsToShow;
+        }
+
+        function getIconPath(iconName) {
+            const icons = {
+                'log-out': '<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>',
+                'phone': '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>',
+                'wifi': '<path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/>',
+                'home': '<path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>',
+                'dumbbell': '<path d="m6.5 6.5 11 11"/><path d="m21 21-1-1"/><path d="m3 3 1 1"/><path d="m18 22 4-4"/><path d="m2 6 4-4"/><path d="m3 10 7-7"/><path d="m14 21 7-7"/>',
+                'utensils': '<path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/>',
+                'iptv': '<rect x="4" y="8" width="16" height="10" rx="2" ry="2"/><line x1="8" y1="20" x2="16" y2="20" stroke-width="2"/>',
+                'music': '<path d="M4 12a8 8 0 0 1 16 0v4a3 3 0 0 1-3 3h-1a3 3 0 0 1-3-3v-3a2 2 0 0 0-2-2 2 2 0 0 0-2 2v3a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3v-4z"/>',
+                'video': '<polygon points="5 3 19 12 5 21 5 3" fill="currentColor"/>',
+                'movie': '<path d="M3 4h18v14H3z"/><path d="M3 8h18"/><path d="M6 4l2 4"/><path d="M10 4l2 4"/><path d="M14 4l2 4"/><path d="M18 4l2 4"/>',
+            };
+            return icons[iconName] || '';
+        }
+
+        document.getElementById('prevButton').addEventListener('click', () => {
+            if (startIndex > 0) {
+                startIndex--;
+                updateCarousel();
+            }
+        });
+
+        document.getElementById('nextButton').addEventListener('click', () => {
+            if (startIndex < menuItems.length - itemsToShow) {
+                startIndex++;
+                updateCarousel();
+            }
+        });
+
+        // Initialize carousel
+        updateCarousel();
+    </script>
+</body>
+
+</html>
