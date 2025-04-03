@@ -115,6 +115,12 @@
         #test {
             margin-top: -5em;
         }
+
+        .weather-icon {
+            width: 50px;
+            /* Ajusta el tamaño de la imagen */
+            height: auto;
+        }
     </style>
 </head>
 
@@ -131,13 +137,13 @@
             <!-- Weather -->
             <div class="absolute top-8 right-48 text-white">
                 <div class="text-lg">23° / 21° C</div>
-                <div class="text-sm opacity-80">RM 1</div>
             </div>
 
             <!-- Logo -->
-            <div class="absolute top-8 right-8 text-white flex items-center space-x-2">
-                <div class="text-3xl font-light">Weather</div>
+            <div class="absolute top-8 right-8 flex items-center">
+                <img src="assets/img/lluvia.png" alt="Weather Icon" class="weather-icon">
             </div>
+
         </div>
 
         <!-- Welcome Message -->
