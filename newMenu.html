@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .menu-item {
+            position: relative;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-align: center;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .menu-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-item a {
+            display: block;
+            text-decoration: none;
+        }
+
+        .menu-item img:hover {
+            transform: scale(1.05);
+        }
+
+        .button-container {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 10;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #0e2442;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .button:hover {
+            background-color: #0e2442;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="button-container">
+        <a href="index.html" class="button">Regresar</a>
+    </div>
+    <div class="menu-container">
+        <div class="menu-item">
+            <a href="essenza.html">
+                <img src="https://images.cluvi.com/WnjwMfyaJF/w_576_WnjwMfyaJF_cat_-9.png" alt="Essenza">
+            </a>
+        </div>
+        <div class="menu-item">
+            <a href="desayunos.html">
+                <img src="https://images.cluvi.com/ipPiKVED0f/w_576_ipPiKVED0f_cat_-10.png" alt="Desayunos">
+            </a>
+        </div>
+        <div class="menu-item">
+            <a href="bebidas.html">
+                <img src="https://images.cluvi.com/fCHdRCFfQO/w_576_fCHdRCFfQO_cat_-12.png" alt="Bebidas">
+            </a>
+        </div>
+        <div class="menu-item">
+            <a href="cervezas.html">
+                <img src="https://images.cluvi.com/kB9tfzGQkb/w_576_kB9tfzGQkb_cat_-14.png" alt="Cervezas">
+            </a>
+        </div>
+        <div class="menu-item">
+            <a href="vinos.html">
+                <img src="https://images.cluvi.com/Y8M50p0nCV/w_576_Y8M50p0nCV_cat_-16.png" alt="Vinos">
+            </a>
+        </div>
+        <div class="menu-item">
+            <a href="champagne.html">
+                <img src="https://images.cluvi.com/DSSsBHlUb7/w_576_DSSsBHlUb7_cat_-18.png" alt="Champagne">
+            </a>
+        </div>
+        <div class="menu-item">
+            <a href="bar.html">
+                <img src="https://images.cluvi.com/mYs2sLw1Bo/w_576_mYs2sLw1Bo_cat_-20.png" alt="Bar">
+            </a>
+        </div>
+    </div>
+</body>
+
+</html>
