@@ -153,7 +153,7 @@
                 <img src="assets/img/logo.png" alt="Mi Hotel Logo" style="color: white;">
             </div>
 
-            <h1 class="welcome-text">Bienvenidos</h1>
+            <h1 class="welcome-text" id="greeting">Bienvenidos</h1>
             <p class="subtitle-text">Le deseamos una agradable estancia</p>
 
             <!-- Menu Carousel -->
@@ -211,8 +211,26 @@
             document.getElementById('date').textContent = dateString;
         }
 
+        function setGreeting() {
+            const now = new Date();
+            const hour = now.getHours();
+            let greeting = "Bienvenidos";
+
+            if (hour >= 6 && hour < 12) {
+                greeting = "Buenos días";
+            } else if (hour >= 12 && hour < 20) {
+                greeting = "Buenas tardes";
+            } else {
+                greeting = "Buenas noches";
+            }
+
+            document.getElementById("greeting").textContent = greeting;
+        }
+
+
         setInterval(updateDateTime, 1000);
         updateDateTime();
+        setGreeting();
 
         // Menu Carousel
         function updateCarousel() {
